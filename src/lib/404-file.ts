@@ -1,0 +1,1 @@
+export const file404 = {error:{text:'Файл не найден'}}
