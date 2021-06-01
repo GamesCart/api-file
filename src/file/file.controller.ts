@@ -1,7 +1,6 @@
 import {
     Controller,
     Get,
-    HttpService,
     Param,
     Post,
     Res,
@@ -18,9 +17,8 @@ import { AuthGuard } from 'src/lib/auth.guard';
   export class FileController {
     constructor(
       private readonly fileService: FileService, 
-      private readonly httpService: HttpService
     ) {}
-  
+    // Залив файла файлопомойка
     @UseInterceptors(FilesInterceptor('files', 10, {
       storage: configMulter,
       fileFilter : ( req  ,  file ,  cb )  =>  {
@@ -35,12 +33,16 @@ import { AuthGuard } from 'src/lib/auth.guard';
     ) {
         return await this.fileService.setFile(files)
     }
+
+
+
+    // Вернуть все файлы
     @UseGuards(new AuthGuard())
     @Get('all')
     async getFile(){
       return await this.fileService.getFile()
     }
-
+    // Вернуть по alias
     @Get('/:url')
     async getFileId(    
       @Param('url') url: string,

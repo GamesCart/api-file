@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
         context: ExecutionContext,
     ): Promise<boolean> {
         const request = context.switchToHttp().getRequest();
-        console.log(request.headers.authorization);
+        // Кидаем запрос для проверки разрешения!
         const validate = await this.httpService.post(
             `${this.configService.get('MAIN_DOMANE')}/auth/validate`,{}, {
             headers: {

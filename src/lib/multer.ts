@@ -4,6 +4,7 @@ const crypto = require("crypto");
 
 export  const  configMulter =  diskStorage({
     destination: (req, file, cb) =>{
+        // Генерации папки с датой загрузки файла
         const date = new Date()
         const day = date.getDate();
         const month = date.getMonth();
@@ -13,6 +14,7 @@ export  const  configMulter =  diskStorage({
         cb(null, urlAll);
     },
     filename: (req, file, cb) => {
+        // рандомное значение + имя файла!
         const id = crypto.randomBytes(15).toString('hex');
         cb(null, `${id}-${file.originalname}`);
     },
